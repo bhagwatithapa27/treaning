@@ -1,0 +1,40 @@
+import { useState, useEffect } from "react"; // import useEffect
+import "./App.css";
+
+function App() {
+  const [input, setInput] = useState("");
+  const [todos, setTodos] = useState([]);
+
+  const addTodo = () => {
+    if (input.trim() !== "") {
+      setTodos([...todos, { id: Date.now(), value: input }]);
+      setInput("");
+    }
+  };
+  // useEffect(() => {
+  //   console.log("Todos updated:", todos);
+  // }, [todos]); // runs whenever 'todos' state changes
+
+  return (
+    <div style={{ textAlign: "center", marginTop: "50px" }}>
+      <input
+        type="text"
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+      />
+
+      <br />
+      <br />
+
+      <button onClick={addTodo}>Add</button>
+
+      <ul style={{ listStylePosition: "inside", padding: 0 }}>
+        {todos.map((todoItem) => (
+          <li key={todoItem.id}>{todoItem.value}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export default App;
